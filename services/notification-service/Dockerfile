@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     librabbitmq-dev
 
 # Install PHP extensions required for the stack
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets posix
 
 # Install Redis extension
 RUN pecl install redis && docker-php-ext-enable redis
