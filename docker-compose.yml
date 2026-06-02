@@ -32,6 +32,10 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./services/notification-service:/var/www/html
+    command: php artisan horizon
+    depends_on:
+      - redis
+      - rabbitmq
     networks:
       - eda-network
 
