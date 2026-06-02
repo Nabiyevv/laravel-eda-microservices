@@ -219,11 +219,31 @@ return [
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 3,
             ],
+
+            'supervisor-rabbitmq' => [
+                'connection' => 'rabbitmq', // Points to the connection in config/queue.php
+                'queue' => ['order_queue'], // The queue publisher pushes raw JSON to
+                'balance' => 'auto', // Dynamically scale workers based on volume
+                'minProcesses' => 1,
+                'maxProcesses' => 5,
+                'tries' => 3,
+                'timeout' => 60,
+            ],
         ],
 
         'local' => [
             'supervisor-1' => [
                 'maxProcesses' => 3,
+            ],
+
+            'supervisor-rabbitmq' => [
+                'connection' => 'rabbitmq',
+                'queue' => ['order_queue'],
+                'balance' => 'auto',
+                'minProcesses' => 1,
+                'maxProcesses' => 3,
+                'tries' => 1,
+                'timeout' => 60,
             ],
         ],
     ],
